@@ -17,6 +17,7 @@ on:
       - 'docs/**'
       - '.gitignore'
       - 'version.properties'
+   workflow_dispatch:
 
 jobs:
   build:
