@@ -17,7 +17,6 @@ on:
       - 'docs/**'
       - '.gitignore'
       - 'version.properties'
-  
 
 jobs:
   build:
@@ -29,7 +28,7 @@ jobs:
       - name: Setup SSH Agent
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa  # Handle potential Windows line endings
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_rsa
@@ -88,6 +87,4 @@ jobs:
       - name: Clean Running Docker Containers
         run: |
           docker ps -q | xargs -r docker stop
-          docker ps -aq | xargs
-::contentReference[oaicite:34]{index=34}
- 
+          docker ps -aq | xargs -r docker rm
