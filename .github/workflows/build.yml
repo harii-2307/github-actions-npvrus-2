@@ -17,7 +17,7 @@ on:
       - 'docs/**'
       - '.gitignore'
       - 'version.properties'
-  workflow_dispatch:  # Enables manual triggering
+  
 
 jobs:
   build:
