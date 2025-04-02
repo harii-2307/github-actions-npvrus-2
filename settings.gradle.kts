@@ -14,14 +14,4 @@ plugins {
 rootProject.name = "npvrus"
 include("app")
 
-  gradle.rootProject {
-      task checkSpecv1 {
-          group = 'Verification'
-          description = 'Custom task to perform Specv1 checks.'
-
-          doLast {
-              println 'Executing checkSpecv1 task...'
-              // Add your task-specific logic here
-          }
-      }
-  }
+  
