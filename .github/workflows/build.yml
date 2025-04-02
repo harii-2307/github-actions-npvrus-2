@@ -1,4 +1,3 @@
-#test 
 name: NPVRUS Build and Deploy
 
 on:
@@ -18,7 +17,7 @@ on:
       - 'docs/**'
       - '.gitignore'
       - 'version.properties'
-  
+  workflow_dispatch:  # Enables manual triggering
 
 jobs:
   build:
@@ -30,7 +29,7 @@ jobs:
       - name: Setup SSH Agent
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa  # Handle potential Windows line endings
           chmod 600 ~/.ssh/id_rsa
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_rsa
@@ -43,6 +42,9 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v3
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
       - name: Build with Gradle
         run: ./gradlew ${{ secrets.GRADLE_TASKS }}
@@ -86,4 +88,6 @@ jobs:
       - name: Clean Running Docker Containers
         run: |
           docker ps -q | xargs -r docker stop
-          docker ps -aq | xargs -r docker rm
+          docker ps -aq | xargs
+::contentReference[oaicite:34]{index=34}
+ 
